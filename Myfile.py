@@ -54,4 +54,15 @@ def start_stop_vm_instances(compute_client, action):
             logging.error("Invalid action. Please choose 'start' or 'stop'.")
             sys.exit(1)
     logging.info(f"All VMs have been {action}ed.")
-            
+
+def main(action):
+    credential = authenticate_azure()
+    compute_client = ComputeManagementClient(credential, SUBSCRIPTION_ID)
+    start_stop_vm_instances(compute_client, action)
+
+if __name__ == " __main__ ":
+    if len(sys.argv) !=2:
+        logging.error("Usage: python Myfile1.py <start/stop>")
+        sys.exit(1)
+    action = sys.argv[1]
+    main(action)            
